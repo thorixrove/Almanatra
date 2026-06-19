@@ -7,7 +7,7 @@ const envSchema = z.object({
 
     CLERK_PUBLISHABLE_KEY: z.string().min(1),
     CLERK_SECRET_KEY: z.string().min(1),
-    CLERK_WEBHOOKS_SECRET: z.string().optional(),
+    CLERK_WEBHOOK_SECRET: z.string().optional(),
 
     FRONTEND_URL: z.string().url(),
 
