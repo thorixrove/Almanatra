@@ -5,7 +5,6 @@ import { db } from "../db";
 import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import { parseRole } from "../lib/roles";
-import { error } from "console";
 
 
 export async function clerkWebhookHandler(req: Request, res: Response) {
