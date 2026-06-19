@@ -5,6 +5,7 @@ import { db } from "../db";
 import { users } from "../db/schema";
 import { eq } from "drizzle-orm";
 import { parseRole } from "../lib/roles";
+import { error } from "console";
 
 
 export async function clerkWebhookHandler(req: Request, res: Response) {
@@ -36,7 +37,7 @@ export async function clerkWebhookHandler(req: Request, res: Response) {
             u.email_addresses?.[0]?.email_address;
 
             const displayName =
-            [u.first_name, u.last_name].filter(Boolean).join(" ") || u.username || null; // ganti dengan (undifined)
+            [u.first_name, u.last_name].filter(Boolean).join(" ") || u.username || undefined; // ganti dengan (undifined)
 
             const role = parseRole(u.public_metadata?.role)
 
@@ -63,10 +64,7 @@ export async function clerkWebhookHandler(req: Request, res: Response) {
 
 
         res.json({ok:true})
-    } catch (err) {
-        console.error("Cler webhook error", err);
-        res.status(400).json({ error: "Invalid webhook"})
-
-        
-    }
+        } catch {
+            res.status(400).json({ error: "Webhook processing failed" });
+        }
 }
