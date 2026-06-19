@@ -64,10 +64,7 @@ export async function clerkWebhookHandler(req: Request, res: Response) {
 
 
         res.json({ok:true})
-    } catch (err) {
-        console.error("Cler webhook error", err);
-        res.status(400).json({ error: "Invalid webhook"})
-
-        
-    }
+        } catch {
+            res.status(400).json({ error: "Webhook processing failed" });
+        }
 }
