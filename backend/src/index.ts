@@ -9,7 +9,6 @@ import {clerkMiddleware} from "@clerk/express"
 import { clerkWebhookHandler} from "./webhooks/clerk";
 import { getEnv } from './lib/env';
 import keepAliveCron from "./lib/cron";
-import { products } from "./db/schema";
 import productRouter from "./routes/productRouter"
 import meRouter from "./routes/meRoute"
 import streamRouter from "./routes/streamRouter"
