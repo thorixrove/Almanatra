@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch --import ./src/instrument.ts index.ts",
+    "dev": "tsx watch --import ./src/instrument.ts src/index.ts",
     "build": "tsc",
     "start": "node --import ./src/instrument.ts dist/index.js",
     "db:generate": "drizzle-kit generate --out ./drizzle",
