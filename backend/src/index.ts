@@ -15,10 +15,10 @@ import meRouter from "./routes/meRoute"
 import streamRouter from "./routes/streamRouter"
 import chekoutRouter from "./routes/chekoutRouter";
 import adminRouter from "./routes/adminRouter"
+import orderRouter from "./routes/orderRouter"
 
 import { polarWebhookHandler } from "./webhooks/polar";
-import { sentryClerkUserMiddleware } from "./midlleware/SentryClerkUser";
-
+import { sentryClerkUserMiddleware } from "./midlleware/sentryClerkUser";
 
 const env = getEnv();
 const app = express();
@@ -49,6 +49,7 @@ app.use("/api/products", productRouter)
 app.use("/api/stream", streamRouter)
 app.use("/api/checkout", chekoutRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/orders", orderRouter);
 
 
 
