@@ -6,7 +6,6 @@ import { orderItems, orders, products, users } from "../db/schema";
 import { asc, desc, eq, inArray } from "drizzle-orm";
 import { db } from "../db";
 import { getEnv } from "../lib/env";
-import { error } from "console";
 import { getStreamChatServer, streamChatDisplayName, streamUserId } from "../lib/stream";
 
 const env = getEnv ()

@@ -1,9 +1,6 @@
 @import "tailwindcss";
-/*@plugin "daisyui"; */
+/* @plugin "daisyui"; */
 
-
-/* Change a Colour Background */
- @plugin "daisyui" {
-   themes: forest --default
- }
-
+@plugin "daisyui" {
+  themes: forest --default;
+}
