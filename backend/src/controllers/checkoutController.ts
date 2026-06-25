@@ -95,9 +95,6 @@ export async function createCheckout( req: Request, res: Response, next: NextFun
         const successUrl = `${env.FRONTEND_URL}/checkout/return?checkout_id={CHECKOUT_ID}`
         const returnUrl = `${env.FRONTEND_URL}/cart`
 
-<<<<<<< HEAD
-
-
         const checkout = await polarCreateCheckout (env, {
             products: [env.POLAR_CHECKOUT_PRODUCT_ID],
             prices: {
@@ -114,33 +111,7 @@ export async function createCheckout( req: Request, res: Response, next: NextFun
             external_customer_id:userId,
             metadata: {checkout_Sessions_id:session.id}
         })
-=======
-        let checkout: { id: string; url: string };
-        try {
-            checkout = await polarCreateCheckout(env, {
-                products: [env.POLAR_CHECKOUT_PRODUCT_ID],
-                prices: {
-                    [env.POLAR_CHECKOUT_PRODUCT_ID]:[{
-                        amount_type: "fixed",
-                        price_currency: "idr",
-                        price_amount: totalCents
-                    }]
-                },
-                success_url: successUrl,
-                return_url: returnUrl,
-                external_customer_id: userId,
-                metadata: {checkout_Sessions_id:session.id}
-            });
-        } catch (error: any) {
-            console.error("Polar API error:", error);
-            res.status(502).json({ error: "Payment gateway unavailable or configuration error" });
-            return;
-        }
->>>>>>> 8a7822dcac071a2c82e503503b9a97457f610bef
 
-
-
-        
         await db
         .update(checkoutSessions)
         .set({polarCheckoutId:checkout.id})
