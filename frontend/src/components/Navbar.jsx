@@ -1,4 +1,3 @@
-import React from 'react'
 import { Show, SignInButton, UserButton, useAuth } from '@clerk/react'
 import { apiFetch } from '../lib/api'
 import {useQuery} from "@tanstack/react-query"
@@ -16,7 +15,7 @@ const Navbar = () => {
   })
   const role = ourData?.user?.role
 
-  const cartCount = useCart((s) => s.items.reduce((n, line) => m + line.quantity, 0))
+  const cartCount = useCart((s) => s.items.reduce((n, line) => n + line.quantity, 0))
 
   return (
     <header className='sticky top-0 z-50 border-b border-base-300 bg-base-100/95 shadow-sm

@@ -1,41 +1,42 @@
-import { removeItem } from "framer-motion";
 import { create } from "zustand";
-import { persist } from "zustand/middleware"
+import { persist } from "zustand/middleware";
 
-export const useCart = create ( persist (
+// persist will save the cart items to localStorage
+export const useCart = create(
+  persist(
     (set, get) => ({
-        items: [],
+      items: [],
 
-        addItem(productId, qty = 1 ) {
-            const item = [...get().item]
-            const i = item.findIndex((item) => item.productId === productId)
-            if (i>= 0) {
-                item[i] = { ...items[i], quantity: items[i].quantity + qty}
-            } else{
-                items.push({ productId, quantity: qty})
-            }
-            set({ items })
-        },
+      addItem(productId, qty = 1) {
+        const items = [...get().items];
+        const i = items.findIndex((item) => item.productId === productId);
+        if (i >= 0) {
+          items[i] = { ...items[i], quantity: items[i].quantity + qty };
+        } else {
+          items.push({ productId, quantity: qty });
+        }
+        set({ items });
+      },
 
-        removeItem(productId) {
-            set({ items: get().items.filter((item) => item.productId !== productId) })
-        },
+      removeItem(productId) {
+        set({ items: get().items.filter((item) => item.productId !== productId) });
+      },
 
-        setQty(productId, quantity) {
-            if (quantity <= 0) {
-                set({ items: get().item.filter((item) => item.productId !== productId)})
-                return
-            }
-            const items = get().item.map((items) =>
-            item.productId === productId ? { ...item, quantity} : item,
-            )
-            set({ item})
-        },
+      setQty(productId, quantity) {
+        if (quantity <= 0) {
+          set({ items: get().items.filter((item) => item.productId !== productId) });
+          return;
+        }
+        const items = get().items.map((item) =>
+          item.productId === productId ? { ...item, quantity } : item,
+        );
+        set({ items });
+      },
 
-        clear() {
-            set({ items: [] })
-        },
+      clear() {
+        set({ items: [] });
+      },
     }),
-    { name: "Almanatra-cart"}
-),
-)
+    { name: "Almanatra-cart" },
+  ),
+);
