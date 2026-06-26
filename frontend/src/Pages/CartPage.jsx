@@ -34,16 +34,18 @@ function CartPage() {
         <ShoppingCartIcon className="size-8 text-primary" aria-hidden />
         Cart
       </h1>
-      {items.length === 0 ? < EmptyCart /> : productsLoading ? (
+
+      {items.length === 0 ? (
+        <EmptyCart />
+      ) : productsLoading ? (
         <CartSkeleton lines={items.length} />
       ) : productsError ? (
-        <PageError message="Could not load product details. Refresh the page or try again" />
-      ) : (<div className="grid gap-10 lg:grid-cols-[1fr_320px]">
-        <ul className="spacce-y-4">
-            {lines.map(({line,product:p}) => (
-
-
-                              <li
+        <PageError message="Could not load product details. Refresh the page or try again shortly." />
+      ) : (
+        <div className="grid gap-10 lg:grid-cols-[1fr_320px]">
+          <ul className="space-y-4">
+            {lines.map(({ line, product: p }) => (
+              <li
                 key={line.productId}
                 className="card card-side border border-base-300 bg-base-100 shadow-sm"
               >
@@ -120,52 +122,54 @@ function CartPage() {
                 </div>
               </li>
             ))}
-        </ul>
-        <aside className="card border border-base-300 bg-base-100 p-6 shadow-md">
-            <div className="card border border-base-300 bg-base-100 p-6 shadow-md">
-                <div className="flex justify-between text-sm">
-                    <span className="text-base-content/70">Subtotal</span>
-                    <span className="font-semibold text-base-content">
-                        {formatPrice(subtotal, lines[0]?.productId?.currency ?? "idr")}
-                    </span>
-                </div>
+          </ul>
+
+          <aside className="card border border-base-300 bg-base-100 p-6 shadow-md">
+            <div className="flex justify-between text-sm">
+              <span className="text-base-content/70">Subtotal</span>
+              <span className="font-semibold text-base-content">
+                {formatPrice(subtotal, lines[0]?.product?.currency ?? "usd")}
+              </span>
             </div>
 
             <Show when="signed-in">
-                <button type="button" onClick={checkout} disabled={checkoutLoading} aria-busy={checkoutLoading} className="btn btn-primary mt-6 w-full gap-2">
-                    {checkoutLoading ? (
-                        <span className="loading loading-spinner loading-sm" aria-hidden />
-
-                    ) : (
-                        <ShoppingCartIcon className="size-4" aria-hidden />
-                    )}
-                    {checkoutLoading ? "Opening checkout…" : "Checkout securely"}
-                </button>
+              <button
+                type="button"
+                onClick={checkout}
+                disabled={checkoutLoading}
+                aria-busy={checkoutLoading}
+                className="btn btn-primary mt-6 w-full gap-2"
+              >
+                {checkoutLoading ? (
+                  <span className="loading loading-spinner loading-sm" aria-hidden />
+                ) : (
+                  <ShoppingCartIcon className="size-4" aria-hidden />
+                )}
+                {checkoutLoading ? "Opening checkout…" : "Checkout securely"}
+              </button>
             </Show>
 
             <Show when="signed-out">
-                <SignInButton mode="modal">
-                    <button type="button" className="btn btn-outline btn-primary mt-6 w-full gap-2">
-                        <LogInIcon className="size-4" aria-hidden />
-                        Sign in to checkout
-                    </button>
-                </SignInButton>
+              <SignInButton mode="modal">
+                <button type="button" className="btn btn-outline btn-primary mt-6 w-full gap-2">
+                  <LogInIcon className="size-4" aria-hidden />
+                  Sign in to checkout
+                </button>
+              </SignInButton>
             </Show>
 
-            <p className="mt-4 flex items-start gap-2  text-xs text-base-content/60">
-            <HeadphonesIcon className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden />
-            <span>
+            <p className="mt-4 flex items-start gap-2 text-xs text-base-content/60">
+              <HeadphonesIcon className="mt-0.5 size-3.5 shrink-0 text-primary" aria-hidden />
+              <span>
                 After payment, open your order for{" "}
-                <strong className="text-base-content">support chat</strong>
-                . Video invites appear in that threads.
-            </span>
+                <strong className="text-base-content">support chat</strong>. Video invites appear in
+                that thread.
+              </span>
             </p>
-
-        </aside>
+          </aside>
         </div>
-    )}
+      )}
     </div>
-  )
+  );
 }
-
-export default CartPage
+export default CartPage;
