@@ -1,9 +1,16 @@
 import { Router } from "express";
-import { getOrder, listOrder, createStreamChannel, createVideoInvite } from "../controllers/orderController";
+import {
+  createStreamChannel,
+  createVideoInvite,
+  getOrder,
+  listOrders,
+} from "../controllers/orderController";
 
 const router = Router();
-router.get("/", listOrder)
-router.get("/:id", getOrder)
-router.get("/:id/stream-channel", createStreamChannel)
-router.get("/id/video-invite", createVideoInvite )
+
+router.get("/", listOrders);
+router.get("/:id", getOrder);
+router.post("/:id/stream-channel", createStreamChannel);
+router.post("/:id/video-invite", createVideoInvite);
+
 export default router;

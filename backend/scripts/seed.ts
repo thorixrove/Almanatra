@@ -178,7 +178,7 @@ async function main() {
     category: p.category,
     description: p.description,
     priceCents: p.priceCents,
-    currency: "idr",
+    currency: "usd",
     imageUrl: p.imageUrl,
     active: true,
   }));
