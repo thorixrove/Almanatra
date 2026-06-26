@@ -99,18 +99,18 @@ export async function createCheckout(req: Request, res: Response, next: NextFunc
     try {
       checkout = await polarCreateCheckout(env, {
         products: [env.POLAR_CHECKOUT_PRODUCT_ID],
+        amount: totalCents,
+        currency: "usd",
         success_url: successUrl,
         return_url: returnUrl,
         external_customer_id: userId,
         metadata: { checkout_sessions_id: session.id },
       });
-
-// ✅ Baru
-} catch (error: any) {
-  console.error("Polar API error:", error?.message ?? error);
-  res.status(502).json({ error: error?.message ?? "Payment gateway unavailable or configuration error" });
-  return;
-}
+    } catch (error: any) {
+      console.error("Polar API error:", error?.message ?? error);
+      res.status(502).json({ error: error?.message ?? "Payment gateway unavailable or configuration error" });
+      return;
+    }
 
     await db
       .update(checkoutSessions)
