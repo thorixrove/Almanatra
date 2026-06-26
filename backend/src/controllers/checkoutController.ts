@@ -104,7 +104,7 @@ export async function createCheckout(req: Request, res: Response, next: NextFunc
         success_url: successUrl,
         return_url: returnUrl,
         external_customer_id: userId,
-        metadata: { checkout_sessions_id: session.id },
+        metadata: { checkout_session_id: session.id },
       });
     } catch (error: any) {
       console.error("Polar API error:", error?.message ?? error);
