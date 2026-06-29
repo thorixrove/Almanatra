@@ -19,6 +19,7 @@ const tracePropagationTargets =
   apiBase.length > 0 ? [apiBase] : typeof window !== "undefined" ? [window.location.origin] : [];
 
 Sentry.init({
+  enabled: import.meta.env.MODE !== "development",
   dsn: import.meta.env.VITE_SENTRY_DSN,
   environment: import.meta.env.MODE,
   sendDefaultPii: true,
